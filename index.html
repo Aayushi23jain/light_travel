@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Light Travels in a Straight Line</title>
+<link rel="icon" type="image/webp" href="assets/img/favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/startScreen.css"><link rel="stylesheet" href="css/studentFlow.css"><link rel="stylesheet" href="css/joints.css"><link rel="stylesheet" href="css/light.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"}}</script></head>
+<body><canvas id="c"></canvas><div id="labels"></div><div id="banner" hidden></div><div id="panel" hidden></div>
+<div id="tl"><div id="langwrap"><button id="langb" class="pill"></button><div id="langs" hidden></div></div><button id="theme" class="pill sq" aria-label="Toggle Theme"></button><button id="fs" class="pill sq" aria-label="Fullscreen"></button><button id="replay" class="pill sq" aria-label="Replay"></button></div>
+<div id="bl" aria-label="Section navigation">
+<button id="prev" class="nav-btn" type="button" hidden></button>
+<button id="next" class="nav-btn" type="button" hidden></button>
+</div>
+<div id="logo"><img src="assets/img/ConveGenius.Ai%20Logo1.webp" alt="ConveGenius.AI" class="logo-img"></div>
+<div id="load"><img src="assets/img/ConveGenius.Ai%20Logo1.webp" alt="ConveGenius.AI" style="width:200px;height:auto;display:block;margin:0 auto 10px"><span id="loadText">Loading…</span></div>
+<div id="tourOverlay" class="tour-overlay" hidden>
+<div id="tourSpotlight" class="tour-spotlight"></div>
+<div id="tourTooltip" class="tour-tooltip">
+<div id="tourProgress" class="tour-tooltip-progress"></div>
+<div id="tourTitle" class="tour-tooltip-title"></div>
+<div id="tourBody" class="tour-tooltip-body"></div>
+<div class="tour-tooltip-footer">
+<button id="tourSkipBtn" class="tour-skip-btn"></button>
+<div class="tour-tooltip-nav">
+<button id="tourBackBtn" class="tour-nav-btn">Back</button>
+<button id="tourNextBtn" class="tour-nav-btn tour-nav-btn-primary">Next</button>
+</div>
+</div>
+</div>
+<script type="module" src="js/main.js"></script></body></html>

@@ -1,0 +1,65 @@
+/* Types of Joints additions on top of the Sublimation stylesheet */
+body[data-l=hi], body[data-l=mr] { font-family: P, 'Noto Sans Devanagari', 'Nirmala UI', sans-serif; }
+#labels .hot { position: absolute; width: 56px; height: 100px; margin: -78px 0 0 -28px; border: 0; background: transparent; pointer-events: auto; cursor: pointer; padding: 0; }   /* click target: arrow on top, transparent part covers the object below it */
+#labels .hot::before { content: ''; position: absolute; left: 9px; top: 0; width: 38px; height: 54px; pointer-events: none; animation: hotArrow 1s ease-in-out infinite;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 54'%3E%3Cpath d='M12 2h14v22h9L19 51 3 24h9z' fill='%2320c4d8' stroke='%230a6f80' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M15 5h5v21h-5z' fill='%2360e6f2' opacity='.7'/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .45)); }
+@keyframes hotArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { .sj-rope, .sj-seat, .sj-stage .sj-b2 { animation: none !important; } }
+#panel h3 + p { margin-top: 6px; }
+/* swing: each rope stays hooked to the top bar and rotates about its own top end; the seat + child move along the same arc, so nothing detaches */
+.sj-rope, .sj-seat { animation: 2.6s ease-in-out infinite; }
+.sj-rope { transform-box: view-box; }
+.sj-rope.l { transform-origin: 60px 30px; animation-name: sjRope; }
+.sj-rope.r { transform-origin: 140px 30px; animation-name: sjRope; }
+.sj-seat { animation-name: sjSeat; }
+@keyframes sjRope { 0%, 100% { transform: rotate(9deg); } 50% { transform: rotate(-9deg); } }
+@keyframes sjSeat { 0%, 100% { transform: translate(-18.8px, 1.5px); } 50% { transform: translate(18.8px, 1.5px); } }
+.sj-types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+.sj-type { background: var(--sf-panel); border: 2px solid transparent; border-radius: 12px; padding: 8px 10px; text-align: center; transition: border-color .3s, background .3s; }
+.sj-type b { display: block; font-size: clamp(13px, 1.9vw, 16px); }
+.sj-type span { color: var(--sf-muted); font-size: clamp(11px, 1.5vw, 13px); }
+.sj-type.on { border-color: var(--y); background: var(--b); color: #fff; } .sj-type.on span { color: #e6ebff; }
+.sj-stage { position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px 0 0 -100px; perspective: 400px; }
+.sj-b1, .sj-b2 { position: absolute; left: 90px; width: 20px; height: 80px; border-radius: 10px; background: #d9c2a8; }
+.sj-b1 { top: 18px; } .sj-b2 { top: 100px; transform-origin: 50% 0; }
+.sj-knob { position: absolute; left: 86px; top: 86px; width: 28px; height: 28px; border-radius: 50%; background: var(--y); box-shadow: 0 0 0 4px rgba(255, 184, 28, .3); }
+.sj-stage[data-k=hinge] .sj-b2 { animation: sjHinge 3.2s ease-in-out infinite; }
+.sj-stage[data-k=pivotal] .sj-b2 { animation: sjPivot 3.2s ease-in-out infinite; background: repeating-linear-gradient(90deg, #d9c2a8 0 6px, #b99b7c 6px 10px); }
+.sj-stage[data-k=ball] .sj-b2 { animation: sjBall 3.2s ease-in-out infinite; }
+@keyframes sjHinge { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-110deg); } }
+@keyframes sjPivot { 0%, 100% { transform: rotateY(-70deg); } 50% { transform: rotateY(70deg); } }
+@keyframes sjBall { 0% { transform: rotate(-55deg); } 25% { transform: rotate(0) scaleY(.7); } 50% { transform: rotate(55deg); } 75% { transform: rotate(0) scaleY(1.15); } 100% { transform: rotate(-55deg); } }
+#panel .btn:disabled { opacity: .45; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .sj-swing, .sj-stage .sj-b2 { animation: none !important; } }
+
+/* labels are centred on their computed position (router.js keeps them beside the joint while the model rotates) */
+#labels .lab { transform: translate(-50%, -50%); transition: opacity .24s ease; z-index: 10; }
+#leaders { z-index: 5; pointer-events: none; }        /* labels and leader lines are never dimmed (demo) */
+#leaders .leader { transition: opacity .12s ease; }   /* only for a joint leaving the screen; dot + line fade per frame in js */
+
+/* ---- quiz score card (same look as the Sublimation summary) ---- */
+.qs-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, .55); z-index: 999; pointer-events: none; }
+.qs-card { width: min(90vw, 560px); max-height: calc(100vh - 32px); overflow: auto; background: #16161d; border: 1px solid rgba(255, 255, 255, .18); border-radius: 20px; padding: 28px; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); color: #fff; pointer-events: auto; }
+.qs-card h3 { margin: 0 0 6px; font-size: 22px; }
+.qs-stars { display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; }
+.qs-stars span { font-size: 32px; line-height: 1; color: #4a4a55; } .qs-stars span.on { color: #f5b942; }
+.qs-topic-summary { max-width: 470px; margin: 0 auto 20px; line-height: 1.55; }
+.qs-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px 32px; margin-bottom: 10px; }
+.qs-ring { width: 130px; height: 130px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.qs-ring > div { width: 98px; height: 98px; border-radius: 50%; background: #16161d; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.qs-ring b { font-size: 24px; } .qs-ring small { font-size: 12px; color: #9a9aa5; margin-top: 2px; }
+.qs-stats { display: flex; flex-direction: column; gap: 16px; }
+.qs-stats > div { display: flex; align-items: center; gap: 12px; }
+.qs-stats > div > span { width: 36px; height: 36px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+.qs-stats > div > div { text-align: left; } .qs-stats b { display: block; font-size: 18px; line-height: 1.1; } .qs-stats small { font-size: 12px; color: #9a9aa5; }
+.qs-btn { margin-top: 22px; padding: 10px 28px; border: none; border-radius: 10px; background: #4fa8ff; color: #fff; font: 600 14px inherit; font-family: inherit; cursor: pointer; }
+
+:root[data-theme="light"] .qs-card { background: #e8efec; border-color: rgba(40, 55, 50, .18); color: #202a26; }
+:root[data-theme="light"] .qs-ring > div { background: #e8efec; }
+:root[data-theme="light"] .qs-ring small, :root[data-theme="light"] .qs-stats small { color: #53615b; }
+
+/* Labels mode connector lines: white on the dark scene, dark on the light scene (white lines vanished on the white background) */
+:root[data-theme="light"] .leader line { stroke: rgba(26, 26, 26, .8); stroke-width: 1.8; }
+:root[data-theme="light"] .leader circle { fill: #fff; stroke: #1a1a1a; stroke-width: 1.6; }
+:root[data-theme="light"] .leader.on line { stroke: #0a7fb0; }
+:root[data-theme="light"] .leader.on circle { fill: #0a7fb0; stroke: #fff; }

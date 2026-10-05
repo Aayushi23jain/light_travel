@@ -1,0 +1,11 @@
+{
+  "name": "types-of-joints-web",
+  "private": true,
+  "scripts": {
+    "start": "npx serve -l 8000",
+    "generate-audio": "node generate-audio.js"
+  },
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^5.2.0"
+  }
+}

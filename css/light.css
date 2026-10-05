@@ -1,0 +1,16 @@
+/* Light-topic additions: per-language fonts + the straight/bent beam demo in the student flow. */
+body[data-l="hi"], body[data-l="mr"] { font-family: 'Noto Sans Devanagari', 'Poppins', system-ui, sans-serif; }
+body[data-l="gu"] { font-family: 'Noto Sans Gujarati', 'Poppins', system-ui, sans-serif; }
+body[data-l="te"] { font-family: 'Noto Sans Telugu', 'Poppins', system-ui, sans-serif; }
+
+#sf .sf-art svg, #sf .sj-stage svg { width: 100%; height: 100%; }
+#sf .sf-flame { transform-origin: 94px 96px; animation: lf-flick 1.1s ease-in-out infinite; }
+@keyframes lf-flick { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.18); } }
+#sf .sf-beam { stroke-dasharray: 6 8; animation: lf-dash 1s linear infinite; }
+@keyframes lf-dash { to { stroke-dashoffset: -14; } }
+
+#sf .sj-stage .sj-beam, #sf .sj-stage .sj-eye { transition: opacity .4s; }
+#sf .sj-stage .sj-pipebox { transition: transform .5s; transform-origin: 60px 60px; }
+#sf .sj-stage[data-k="bent"] .sj-beam { opacity: 0; }
+#sf .sj-stage[data-k="bent"] .sj-eye { opacity: 0; }
+#sf .sj-stage[data-k="bent"] .sj-pipebox { transform: rotate(38deg); }

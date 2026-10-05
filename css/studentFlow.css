@@ -1,0 +1,55 @@
+/* Student flow: Step 1 (Hook) + Step 2 (Concept). Sits below the top strip so language/theme stay clickable. */
+#sf {
+  --sf-panel: #20242b; --sf-deep: #2c313a; --sf-ink: #fff; --sf-muted: #b8c0cc;
+  position: fixed; inset: 64px 0 0 0; z-index: 9;
+  display: flex; align-items: center; justify-content: center;
+  padding: 10px; overflow: auto; background: rgba(0, 0, 0, .55);
+  color: var(--sf-ink);
+}
+:root[data-theme="light"] #sf { --sf-panel: #fff; --sf-deep: #eef2f7; --sf-ink: #1c2430; --sf-muted: #5b6675; background: rgba(20, 30, 50, .35); }
+.sf-card { width: min(980px, 100%); max-height: 100%; overflow: auto; margin: auto; padding: 18px 22px 22px; background: var(--sf-panel); border-radius: 18px; box-shadow: 0 10px 40px rgba(0, 0, 0, .45); }
+.sf-dots { display: flex; gap: 8px; margin-bottom: 6px; }
+.sf-dots span { width: 26px; height: 7px; border-radius: 4px; background: var(--sf-deep); }
+.sf-dots .on { background: var(--y); } .sf-dots .done { background: #2fbf71; }
+.sf-title { margin: 6px 0 14px; text-align: center; font-size: clamp(20px, 3.2vw, 32px); }
+.sf-grid { display: grid; grid-template-columns: minmax(150px, 34%) 1fr; gap: 20px; align-items: center; }
+.sf-grid.two { grid-template-columns: 1fr 1fr; align-items: stretch; }
+.sf-art { background: var(--sf-deep); border-radius: 16px; padding: 14px; }
+.sf-art svg { display: block; width: 100%; max-height: 300px; }
+.sf-tablet { transform-box: fill-box; transform-origin: 50% 100%; animation: sfShrink 6s ease-in-out infinite; }
+.sf-puff { fill: #c4ccd1; opacity: 0; animation: sfPuff 3s ease-out infinite; }
+@keyframes sfShrink { 0%, 10% { transform: scale(1); } 80%, 100% { transform: scale(.45); } }
+@keyframes sfPuff { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: .8; } 100% { transform: translateY(-46px); opacity: 0; } }
+.sf-story { margin: 0 0 10px; color: var(--sf-muted); font-size: clamp(14px, 2vw, 18px); }
+.sf-q { margin: 0 0 12px; font-size: clamp(16px, 2.4vw, 22px); }
+.sf-opts { display: grid; gap: 10px; }
+.sf-opt, .sf-tog { font: inherit; color: var(--sf-ink); background: var(--sf-deep); border: 2px solid transparent; border-radius: 14px; padding: 12px 16px; text-align: left; cursor: pointer; font-size: clamp(14px, 2vw, 18px); }
+.sf-opt.on, .sf-tog.on { background: var(--b); border-color: var(--y); color: #fff; }
+.sf-resp { margin: 12px 0 0; font-weight: 700; color: var(--y); font-size: clamp(14px, 2vw, 18px); }
+.sf-next, .sf-start { margin-top: 14px; padding: 11px 32px; font-size: clamp(14px, 2vw, 18px); }
+.sf-next:disabled { opacity: .4; cursor: not-allowed; }
+.sf-start { margin-left: auto; }
+.sf-toggles { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+.sf-tog { text-align: center; min-width: 170px; }
+.sf-card2 { background: var(--sf-deep); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; }
+.sf-map { position: relative; aspect-ratio: 700 / 250; container-type: inline-size; }
+.sf-map svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sf-state { position: absolute; top: 46%; width: 26%; height: 30%; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--sf-panel); border-radius: 10px; font-weight: 700; font-size: 3.6cqw; padding: 0 4px; overflow-wrap: anywhere; z-index: 1; }
+.sf-sublabel { position: absolute; top: 2%; left: 0; right: 0; text-align: center; color: var(--y); font-weight: 700; font-size: 3.8cqw; }
+.sf-sublabel.dim { opacity: .2; }
+.sf-melt line { stroke: var(--y); stroke-width: 6; }
+.sf-melt.dim line { stroke: #8d97a5; opacity: .35; }
+.sf-subpath { fill: none; stroke: #ffb81c; stroke-width: 6; stroke-dasharray: 2 12; stroke-linecap: round; }
+.sf-subpath.dim { opacity: .15; }
+.sf-expl { margin: 8px 0 4px; text-align: center; font-weight: 700; font-size: clamp(13px, 1.9vw, 17px); }
+.sf-depo { margin: 0; text-align: center; color: var(--sf-muted); font-size: clamp(12px, 1.6vw, 14px); }
+.sf-head { margin: 0 0 8px; color: var(--sf-muted); font-size: clamp(13px, 1.8vw, 16px); }
+.sf-pbox { position: relative; flex: 1; min-height: 210px; background: #23272c; border-radius: 12px; overflow: hidden; }
+.sf-p { position: absolute; width: 24px; height: 24px; border-radius: 50%; background: var(--y); transition: left 1.2s ease-in-out, top 1.2s ease-in-out; }
+.sf-phase { margin: 10px 0 0; text-align: center; font-weight: 700; font-size: clamp(16px, 2.4vw, 22px); }
+@media (max-width: 720px) {
+  .sf-grid, .sf-grid.two { grid-template-columns: 1fr; }
+  .sf-art svg { max-height: 150px; }
+  .sf-card { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .sf-tablet, .sf-puff { animation: none; } .sf-p { transition: none; } }

@@ -1,0 +1,315 @@
+/* =====================================================================
+   Start screen (logo + title + "Choose your language" + "Let's start").
+   Shown before the guided tour.
+   Theme:   dark (default)  /  :root[data-theme="light"]
+   Screens: mobile (<=600px) · tablet (601-1024px) · desktop (>=1025px)
+            + short / landscape screens (height based)
+   ===================================================================== */
+
+.ss-overlay {
+  /* ---- dark theme tokens ---- */
+  --ss-page: radial-gradient(120% 90% at 50% 0%, #10204f 0%, #060a2e 60%, #03062a 100%);
+  --ss-card: #404447;
+  --ss-card-border: #ffffff;
+  --ss-card-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+  --ss-text: #ffffff;
+  --ss-sub: #c9cdee;
+  --ss-label: #c3c9df;
+  --ss-opt: #33363a;
+  --ss-opt-text: #ffffff;
+  --ss-opt-hover: #3c4045;
+  --ss-opt-border: transparent;
+  --ss-on: #2244b8;
+  --ss-on-border: #3b5bdb;
+  --ss-on-text: #ffffff;
+  --ss-logo-bg: transparent;
+  --ss-logo-pad: 0;
+  --ss-theme-bg: rgba(255, 255, 255, .12);
+  --ss-theme-text: #ffffff;
+  --ss-focus: #ffb81c;
+
+  /* ---- size tokens (mobile first, overridden below) ---- */
+  --ss-card-w: 440px;
+  --ss-card-pad: 22px 18px 26px;
+  --ss-radius: 24px;
+  --ss-logo-w: 250px;
+  --ss-title: 30px;
+  --ss-tag: 14px;
+  --ss-label-fs: 13px;
+  --ss-opt-h: 54px;
+  --ss-opt-fs: 18px;
+  --ss-gap: 12px;
+  --ss-start-fs: 17px;
+  --ss-start-pad: 13px 34px;
+
+  position: fixed;
+  inset: 0;
+  z-index: 30;                       /* above the loader (20), below the tour (50) and language dialog (1000) */
+  display: flex;
+  overflow-y: auto;
+  padding: 16px 12px;
+  background: var(--ss-page);
+  color: var(--ss-text);
+  animation: ss-fade .25s ease-out;
+  transition: opacity .2s ease;
+}
+.ss-overlay.out { opacity: 0; pointer-events: none; }
+
+:root[data-theme="light"] .ss-overlay {
+  --ss-page: #fffde7;
+  --ss-card: #ffffff;
+  --ss-card-border: #4a90e2;
+  --ss-card-shadow: 0 20px 50px rgba(30, 60, 120, .22);
+  --ss-text: #1a1a1a;
+  --ss-sub: #4a5568;
+  --ss-label: #4a5568;
+  --ss-opt: #eef2f7;
+  --ss-opt-text: #1a1a1a;
+  --ss-opt-hover: #e0e8f3;
+  --ss-opt-border: #d5deeb;
+  --ss-on: #2f54eb;
+  --ss-on-border: #1f3fc4;
+  --ss-on-text: #ffffff;
+  /* the logo is white, so in light mode it sits on a dark pill (same as the bottom-right logo) */
+  --ss-logo-bg: rgba(30, 30, 30, .9);
+  --ss-logo-pad: 10px 20px;
+  --ss-theme-bg: rgba(255, 255, 255, .85);
+  --ss-theme-text: #2f54eb;
+  --ss-focus: #2f54eb;
+}
+
+/* ---- card ---- */
+.ss-card {
+  margin: auto;                      /* centred both ways; scrolls safely when the screen is very short */
+  width: min(100%, var(--ss-card-w));
+  padding: var(--ss-card-pad);
+  background: var(--ss-card);
+  color: var(--ss-text);
+  border: 2px solid var(--ss-card-border);
+  border-radius: var(--ss-radius);
+  box-shadow: var(--ss-card-shadow);
+  text-align: center;
+  outline: none;
+  animation: ss-pop .28s ease-out;
+}
+
+.ss-logo {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--ss-logo-pad);
+  background: var(--ss-logo-bg);
+  border-radius: 16px;
+  line-height: 0;
+}
+.ss-logo img {
+  display: block;
+  width: var(--ss-logo-w);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.ss-title {
+  margin: 14px 0 6px;
+  font-size: var(--ss-title);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ss-text);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, .35);
+}
+:root[data-theme="light"] .ss-title { text-shadow: none; }
+
+.ss-tag {
+  margin: 0 auto 26px;
+  max-width: 34em;
+  font-size: var(--ss-tag);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ss-sub);
+}
+:root[data-theme="light"] .ss-tag { font-weight: 400; }
+
+.ss-label {
+  margin: 0 0 12px;
+  font-size: var(--ss-label-fs);
+  font-weight: 600;
+  color: var(--ss-label);
+}
+
+/* ---- language buttons ---- */
+.ss-langs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ss-gap);
+  margin: 0 auto 22px;
+}
+.ss-opt {
+  min-height: var(--ss-opt-h);
+  padding: 8px 18px;
+  background: var(--ss-opt);
+  color: var(--ss-opt-text);
+  border: 2px solid var(--ss-opt-border);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: var(--ss-opt-fs);
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-opt:hover { background: var(--ss-opt-hover); }
+.ss-opt:active { transform: scale(.985); }
+.ss-opt.on,
+.ss-opt.on:hover {
+  background: var(--ss-on);
+  border-color: var(--ss-on-border);
+  color: var(--ss-on-text);
+}
+/* the language names are written in their own script, so each gets its own font */
+.ss-opt[data-l="en"] { font-family: P, system-ui, sans-serif; }
+.ss-opt[data-l="gu"] { font-family: GU, 'Noto Sans Gujarati', 'Nirmala UI', system-ui, sans-serif; }
+.ss-opt[data-l="te"] { font-family: TE, 'Noto Sans Telugu', 'Nirmala UI', system-ui, sans-serif; }
+.ss-opt[data-l="hi"],
+.ss-opt[data-l="mr"] { font-family: 'Noto Sans Devanagari', 'Nirmala UI', system-ui, sans-serif; }
+
+/* ---- Let's start ---- */
+.ss-start {
+  padding: var(--ss-start-pad);
+  background: var(--y, #ffb81c);
+  color: #1a1a1a;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .35);
+  font-family: inherit;
+  font-size: var(--ss-start-fs);
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, filter .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-start:hover { filter: brightness(1.06); }
+.ss-start:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+:root[data-theme="light"] .ss-start { box-shadow: 0 4px 0 rgba(150, 100, 0, .45); }
+
+.ss-opt:focus-visible,
+.ss-start:focus-visible,
+.ss-theme:focus-visible { outline: 3px solid var(--ss-focus); outline-offset: 3px; }
+
+/* ---- theme button (top-right corner) ---- */
+.ss-theme {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ss-theme-bg);
+  color: var(--ss-theme-text);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+.ss-theme svg { width: 22px; height: 22px; display: block; }
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .ss-overlay {
+    --ss-card-w: 540px;
+    --ss-card-pad: 30px 32px 34px;
+    --ss-logo-w: 320px;
+    --ss-title: 40px;
+    --ss-tag: 17px;
+    --ss-label-fs: 15px;
+    --ss-opt-h: 64px;
+    --ss-opt-fs: 21px;
+    --ss-gap: 14px;
+    --ss-start-fs: 19px;
+    --ss-start-pad: 15px 42px;
+  }
+  .ss-title { margin-top: 18px; }
+  .ss-tag { margin-bottom: 20px; }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .ss-overlay {
+    --ss-card-w: 580px;
+    --ss-card-pad: 34px 40px 38px;
+    --ss-logo-w: 340px;
+    --ss-title: 44px;
+    --ss-tag: 18px;
+    --ss-label-fs: 16px;
+    --ss-opt-h: 68px;
+    --ss-opt-fs: 22px;
+    --ss-gap: 14px;
+    --ss-start-fs: 20px;
+    --ss-start-pad: 16px 48px;
+  }
+  .ss-title { margin-top: 20px; }
+  .ss-tag { margin-bottom: 22px; }
+}
+
+/* Laptops / short windows: tighten heights so the whole card fits without scrolling */
+@media (min-width: 601px) and (max-height: 820px) {
+  .ss-overlay { --ss-title: 34px; --ss-tag: 15px; --ss-opt-h: 52px; --ss-opt-fs: 19px; --ss-gap: 10px; --ss-card-pad: 22px 32px 26px; --ss-logo-w: 250px; }
+  :root[data-theme="light"] .ss-overlay { --ss-logo-pad: 8px 18px; }
+  .ss-title { margin-top: 12px; }
+  .ss-tag { margin-bottom: 14px; }
+  .ss-langs { margin-bottom: 18px; }
+}
+
+/* Very short screens (phones in landscape, tiny windows): 2 columns of languages + wider card */
+@media (max-height: 560px) {
+  .ss-overlay {
+    --ss-card-w: 640px;
+    --ss-card-pad: 14px 22px 18px;
+    --ss-logo-w: 170px;
+    --ss-title: 22px;
+    --ss-tag: 13px;
+    --ss-label-fs: 12px;
+    --ss-opt-h: 38px;
+    --ss-opt-fs: 15px;
+    --ss-gap: 8px;
+    --ss-start-fs: 15px;
+    --ss-start-pad: 10px 32px;
+  }
+  .ss-title { margin: 8px 0 2px; }
+  .ss-tag { margin-bottom: 8px; }
+  .ss-label { margin-bottom: 8px; }
+  .ss-langs { grid-template-columns: repeat(2, 1fr); margin-bottom: 12px; }
+  .ss-langs .ss-opt:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  :root[data-theme="light"] .ss-overlay { --ss-logo-pad: 6px 14px; }
+  .ss-theme { top: 8px; right: 8px; width: 38px; height: 38px; }
+}
+
+/* Wide + short (phone landscape): 3 columns so the card stays low */
+@media (max-height: 560px) and (min-width: 640px) {
+  .ss-langs { grid-template-columns: repeat(3, 1fr); }
+  .ss-langs .ss-opt:last-child:nth-child(odd) { grid-column: auto; }
+  .ss-overlay { --ss-card-w: 720px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .ss-overlay { --ss-card-pad: 18px 14px 22px; --ss-title: 26px; --ss-opt-h: 50px; --ss-opt-fs: 17px; }
+}
+
+@keyframes ss-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ss-pop { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ss-overlay, .ss-card { animation: none; transition: none; } }

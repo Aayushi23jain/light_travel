@@ -1,0 +1,1575 @@
+/* Custom styles for converted WebP images */
+
+/* Logo styling - keeping text logo for simplicity */
+#logo {
+  padding-left: 0;
+  min-height: auto;
+}
+
+/* Loading screen styling */
+#load {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#load img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+#load span {
+  font-size: 16px;
+  color: white;
+}
+
+/* Correct/Incorrect feedback icons */
+.fb.ok::before {
+  content: '✓ ';
+  color: #7dffa8;
+  font-weight: bold;
+}
+
+.fb.no::before {
+  content: '✗ ';
+  color: #ff8a80;
+  font-weight: bold;
+}
+
+/* Quiz option states with icons.
+   AnswerCorrect/AnswerIncorrect.webp are full-width (331x52) button images,
+   so squeezing them into a 20x20 background tile rendered as a squashed
+   "box" beside the selected option. Draw a small round check / cross badge
+   in CSS instead. */
+.opt {
+  position: relative;
+}
+.opt.ok, .opt.no {
+  padding: 14px 52px 14px 16px;
+  border-color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.opt.ok { background-image: url(../assets/img/AnswerCorrect.webp); }
+.opt.no { background-image: url(../assets/img/AnswerIncorrect.webp); }
+.opt.ok::after, .opt.no::after { content: none; } /* icon comes from the webp */
+.opt.sel { border-color: #4fa8ff; background: rgba(79, 168, 255, .22); }
+.opt:disabled { cursor: default; }
+.btn:disabled { cursor: not-allowed; }
+
+/* Feedback text colors for correct/incorrect answers */
+.fb.ok {
+  color: #7dffa8 !important;
+}
+.fb.no {
+  color: #ff8a80 !important;
+}
+
+/* Panel styling with background */
+#panel {
+  background: url(../assets/img/IntroductionPanelBackground.webp) no-repeat center;
+  background-size: cover;
+  background-color: rgba(64, 64, 64, 0.98);
+}
+
+/* Banner styling */
+#banner {
+  background: rgba(64, 64, 64, 0.94) !important;
+  color: white !important;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Generic icon image used inside the pill buttons (language, sound,
+   fullscreen, menu) so they render the real webp assets instead of emoji. */
+.icon-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* Larger icon size for menu and sound buttons */
+#menub .icon-img, #fs .icon-img, #theme .icon-img, #tour .icon-img, #replay .icon-img {
+  width: 24px;
+  height: 24px;
+}
+
+#langb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--button-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  color: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+#langb .icon-img { width: 18px; height: 18px; }
+#langb .lbl { display: none; }
+#langb .dd-arrow { display: none; }
+#langb .globe-icon {
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Light mode: globe icon is dark (matches the outline button ring) */
+:root[data-theme="light"] #langb .globe-icon {
+  color: #1a1a1a !important;
+}
+
+/* Fullscreen and theme buttons - solid background */
+#fs, #theme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--button-bg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Replay button - transparent background with white border (like fullscreen) */
+#replay {
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Replay button visible state */
+#replay.visible {
+  display: flex !important;
+}
+
+/* Tour button (bottom left) - same styling */
+#tour {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--button-bg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  font-size: 16px;
+  color: #fff;
+}
+
+/* SVG styling for fullscreen, theme, and replay buttons */
+#fs svg, #theme svg, #replay svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* Dark mode: replay button icon is white */
+:root:not([data-theme="light"]) #replay svg {
+  color: #fff;
+}
+
+#fs:hover, #theme:hover, #tour:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+  background: var(--button-hover);
+}
+
+/* Replay button hover - blue color */
+#replay:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+  border-color: #4fa8ff;
+  background: rgba(79, 168, 255, 0.2);
+}
+
+/* Light mode: replay button - darker border and icon */
+:root[data-theme="light"] #replay {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+:root[data-theme="light"] #replay svg {
+  color: #1a1a1a;
+}
+:root[data-theme="light"] #replay:hover {
+  border-color: #4fa8ff;
+  background: rgba(79, 168, 255, 0.15);
+}
+#replay:hover svg {
+  color: #4fa8ff;
+}
+
+/* Menu button - just images without outer div styling */
+#menub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+#menub:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Menu button locked until the welcome dialog's Continue button is
+   clicked (see main.js / dialog.js). Belt-and-suspenders on top of the
+   JS `disabled` property + onclick guard, so it's genuinely unclickable
+   even if something else touches the element. */
+/* Menu button is locked (greyed, unclickable) before the welcome dialog is
+   passed. Same look on every screen size / theme / language. */
+#menub[disabled] {
+  opacity: .4;
+  pointer-events: none;
+  cursor: default;
+}
+
+
+/* Icon images inside the menu button should be same size as container */
+#menub .icon-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Tour button specific styling from zip file - 40px size with background */
+#tour {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Light mode: tour button icon is white */
+:root[data-theme="light"] #tour {
+  color: #fff;
+}
+
+/* Light mode: replay button - darker border and icon */
+:root[data-theme="light"] #replay {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+:root[data-theme="light"] #replay svg {
+  color: #1a1a1a;
+}
+:root[data-theme="light"] #replay:hover {
+  border-color: #4fa8ff;
+  background: rgba(79, 168, 255, 0.15);
+}
+:root[data-theme="light"] #replay:hover svg {
+  color: #4fa8ff;
+}
+
+/* Tour highlight effect */
+.tour-highlight {
+  animation: tourPulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 184, 28, 0.8);
+  border: 2px solid #ffb81c;
+  border-radius: 50%;
+}
+
+@keyframes tourPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Pointer arrow: the arrow that points at whichever apparatus piece the
+   learner needs to click next (Practice: each part in turn; Activity: the
+   burner). Positioned every frame in scene.js via cam projection of the
+   target object's world position, offset to sit beside it (not on top of
+   it) with its tip aimed at the object. Muted/dull, not neon-bright, and
+   disappears the instant that object is clicked. */
+/* Background/grid colour matches style.css's own defaults (bright blue-indigo
+   glow + teal-blue grid), so no override is applied here anymore. */
+
+/* Mixture-selector dropdown (Activity mode): a single collapsed pill with
+   the current mixture name + a chevron (built from the UpArrow.webp asset,
+   same icon/colour used elsewhere in the app), matching the look of the
+   language dropdown. Clicking it reveals the list of mixtures below. */
+#dd {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+/* `#dd .pill` in style.css sets display:block with higher (id) specificity,
+   which pushed the chevron <img> onto its own line under the label. Force
+   flex here so the arrow sits to the right of the mixture name. */
+#dd .dd-toggle,
+.dd-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 170px;
+  text-align: left;
+}
+.dd-toggle .lbl {
+  flex: 1;
+  line-height: 1.3;
+}
+.dd-arrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  /* UpArrow.webp points up; rotate it to a down-chevron for the closed
+     (collapsed) state, and flip back to pointing up once the list opens. */
+  transform: rotate(180deg);
+  transition: transform .2s ease;
+  filter: brightness(0) invert(1);
+}
+/* Open state: chevron points up. #langb gets the `open` class directly (it
+   isn't a .dd-toggle), so it needs its own selector or it stayed pointing
+   down while the language list was open. */
+.dd-toggle.open .dd-arrow,
+#langb.open .dd-arrow {
+  transform: rotate(0deg);
+}
+.dd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  background: var(--g);
+  padding: 8px;
+  border-radius: 12px;
+}
+.dd-list .pill {
+  text-align: left;
+  max-width: 170px;
+  /* Neutral/unselected look, so the currently-selected mixture (below)
+     clearly stands out in blue against the rest. */
+  background: #3a3a44;
+}
+.dd-list .pill.on {
+  background: var(--b);
+  outline: 2px solid #6f8bff;
+}
+
+/* Wrapper keeps the language dropdown list positioned relative to the
+   language button itself (not the whole toolbar), so it always opens
+   directly below #langb instead of drifting to the side. */
+#langwrap {
+  position: relative;
+}
+#langs {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------------
+   Dark/Light mode contrast fix.
+   #banner always sits on a fixed DARK background (the grey overlay --g),
+   and .lab pins always sit on a fixed BLACK pill — neither changes with
+   the theme, so both stay pinned to white text regardless of theme.
+   #panel's dark-mode look (dark image bg) also needs white text; its
+   light-mode look (white bg, set below) needs black text instead. */
+#banner,
+#panel h3, #panel p, #panel ul, #panel li,
+.lab {
+  color: #fff !important;
+}
+
+/* Light mode: #panel (Introduction, Activity's question card, Quiz's
+   question card, and Practice's post-demo explain card all share this one
+   element) gets a plain white background with bold black text instead of
+   the dark image/overlay + forced-white text used above for dark mode.
+   Applies at every screen size since it targets #panel itself — its
+   responsive sizing/positioning (desktop box vs. mobile bottom-sheet) is
+   handled separately in the responsive section above; only colour/weight
+   changes here. */
+:root[data-theme="light"] #panel {
+  background: rgba(232, 239, 236, .92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #1a1a1a;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, .12);
+}
+
+/* Light mode: #banner (top instruction) gets white translucent background */
+:root[data-theme="light"] #banner {
+  background: rgba(232, 239, 236, .88) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #1a1a1a !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .15);
+}
+
+/* Light mode: dropdown lists get white translucent background */
+:root[data-theme="light"] .dd-list {
+  background: rgba(255, 255, 255, .95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+  border: 1px solid rgba(0, 0, 0, .08);
+}
+
+/* Light mode: dropdown list pills get lighter background */
+:root[data-theme="light"] .dd-list .pill {
+  background: rgba(248, 250, 252, .95);
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, .06);
+}
+
+/* Light mode: dropdown toggle button styling */
+
+:root[data-theme="light"] .dd-toggle {
+  background: var(--button-bg);
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+/* Light mode: dropdown selected pill styling */
+:root[data-theme="light"] .dd-list .pill.on {
+  background: rgba(74, 144, 226, .2);
+  color: #1a1a1a;
+  border-color: #4a90e2;
+  font-weight: 600;
+}
+
+/* Light mode: dropdown list selected pill gets blue tint */
+:root[data-theme="light"] .dd-list .pill.on {
+  background: rgba(111, 139, 255, .25);
+}
+:root[data-theme="light"] #panel h3,
+:root[data-theme="light"] #panel p,
+:root[data-theme="light"] #panel ul,
+:root[data-theme="light"] #panel li {
+  color: #1a1a1a !important;
+  font-weight: 600;
+}
+:root[data-theme="light"] #panel .chat {
+  background: rgba(238, 241, 245, .85);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+:root[data-theme="light"] #panel .chat.r {
+  background: rgba(223, 230, 238, .85);
+  color: #1a1a1a;
+}
+:root[data-theme="light"] #panel .opt {
+  background: rgba(245, 246, 248, .85);
+  color: #1a1a1a;
+  font-weight: 600;
+  border-color: #c7ccd4;
+}
+:root[data-theme="light"] #panel .opt.sel {
+  background: rgba(79, 168, 255, .22);
+  border-color: #2b7fd6;
+}
+:root[data-theme="light"] #panel .opt.ok {
+  background: url(../assets/img/AnswerCorrect.webp) center / 100% 100% no-repeat rgba(32, 192, 92, .12);
+  border-color: transparent;
+  color: #14532d;
+}
+:root[data-theme="light"] #panel .opt.no {
+  background: url(../assets/img/AnswerIncorrect.webp) center / 100% 100% no-repeat rgba(229, 59, 59, .12);
+  border-color: transparent;
+  color: #7f1d1d;
+}
+:root[data-theme="light"] #panel .fb {
+  font-weight: 700;
+}
+
+
+
+/* Fullscreen icon: replaces the reused UpArrow.webp (which never changed
+   between "enter" and "exit" states) with two small inline SVGs that
+   swap depending on document.fullscreenElement. No extra asset needed;
+   colour follows currentColor so it stays readable on the blue pill in
+   both themes. */
+#fs svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  display: block;
+}
+
+/* Leader lines connecting each label pill to the part it names (Labels
+   mode). The SVG fills the #labels overlay, which sits above the canvas,
+   so lines always draw on top of the 3D assets. Positioned per frame in
+   main.js. Selected label's line picks up the same cyan as its pill. */
+#leaders {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.leader line {
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.leader circle {
+  fill: #fff;
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 1;
+}
+.leader.on line { stroke: #3ee0ff; }
+.leader.on circle { fill: #3ee0ff; }
+
+/* ---------------------------------------------------------------------
+   Language button: same size as theme/fullscreen/tour buttons on all
+   screen sizes - just the icon, no label or chevron. */
+@media (max-width: 768px) {
+  #langb .icon-img {
+    width: 16px;
+    height: 16px;
+  }
+}
+@media (pointer: coarse) {
+  #langb {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  #langb .icon-img {
+    width: 18px;
+    height: 18px;
+  }
+}
+.star {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../assets/img/Star.webp) no-repeat center;
+  background-size: contain;
+}
+
+/* ---------------------------------------------------------------------
+   Guided tour: a dark mask with a "spotlight" cut-out around the current
+   step's target element, plus a tooltip card. Sits above everything else.
+   Colours reuse the app's existing theme variables so it matches both
+   dark and light mode automatically. */
+:root {
+  --tour-bg: var(--g);
+  --tour-border: rgba(255, 255, 255, .18);
+}
+:root[data-theme="light"] {
+  --tour-bg: rgba(255, 255, 255, .9);
+  --tour-border: rgba(0, 0, 0, .12);
+}
+:root[data-theme="light"] .tour-tooltip {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.tour-spotlight {
+  position: absolute;
+  top: 0; left: 0; width: 0; height: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(6, 12, 20, .72);
+  opacity: 0;
+  pointer-events: none;
+  transition: top .35s ease, left .35s ease, width .35s ease,
+              height .35s ease, border-radius .35s ease, opacity .25s ease;
+}
+
+.tour-tooltip {
+  position: absolute;
+  width: min(300px, calc(100vw - 32px));
+  background: var(--tour-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--tour-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .45);
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  transition: top .35s ease, left .35s ease;
+}
+
+.tour-tooltip-progress {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.tour-tooltip-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.tour-tooltip-body {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.tour-tooltip-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tour-skip-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.tour-skip-btn:hover { color: var(--text-primary); }
+
+.tour-tooltip-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-nav-btn {
+  border: 1px solid var(--tour-border);
+  background: var(--button-bg);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.tour-nav-btn:hover { background: var(--button-hover); }
+
+/* Back button: smaller, quieter than the primary Next/Finish button */
+#tourBackBtn {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--tour-border);
+  padding: 8px 12px;
+}
+#tourBackBtn:hover { background: rgba(255, 255, 255, .1); }
+
+.tour-nav-btn-primary {
+  background: var(--y);
+  color: #222;
+  border: none;
+}
+.tour-nav-btn-primary:hover { filter: brightness(1.08); }
+
+@media (max-width: 480px) {
+  .tour-tooltip { padding: 14px; }
+  .tour-tooltip-title { font-size: 15px; }
+  .tour-tooltip-body { font-size: 12px; }
+}
+
+/* ---------------------------------------------------------------------
+   Extra responsive tweaks: mixture dropdown + quiz summary card, so
+   neither overflows or overlaps the 3D model on tablet/mobile. */
+@media (max-width: 1024px) {
+  .dd-toggle,
+  .dd-list .pill {
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 420px) {
+  .tour-tooltip {
+    width: min(280px, calc(100vw - 24px));
+  }
+}
+
+/* Home-screen bottom-right logo: the same ConveGenius wordmark image used
+   on the loading screen (icon + "ConveGenius.AI" text already baked into
+   the asset). Previously this was force-fit into a 26x26 circle *next to*
+   separately-typed text, which squished/cropped the image into an
+   illegible blob and duplicated the branding. Shown here at its natural
+   aspect ratio instead — height fixed, width auto, no crop. */
+#logo {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: transparent;
+  width: fit-content;
+}
+
+/* Light mode: logo sits on a black, translucent pill (same dark look as the
+   "Let us discuss" panel in dark mode) so the white logo stays readable. */
+:root[data-theme="light"] #logo {
+  background: rgba(30, 30, 30, .78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .25);
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+#logo .logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .35));
+}
+:root[data-theme="light"] #logo .logo-img {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .35));
+}
+@media (max-width: 600px) {
+  #logo {
+    padding: 5px 10px;
+  }
+  #logo .logo-img {
+    height: 22px;
+  }
+}
+
+/* Language, theme, fullscreen, and tour buttons were using two different
+   background sources (.pill's fixed var(--b), vs var(--button-bg) which
+   actually adapts between dark/light theme), so they visibly mismatched
+   in light mode. All now share the same theme-adaptive background. */
+#langb,
+#theme,
+#fs,
+#tour {
+  background: var(--button-bg);
+}
+/* Phones: Quiz + Activity question card is attached to the TOP of the screen
+   (not a bottom sheet). The 3D scene is re-framed in the free area below it
+   (see updateReserve() in scene.js, which reserves the same 48% of height). */
+@media (max-width: 600px) {
+  #panel.qpanel {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    width: min(300px, 88vw);
+    max-width: 88vw;
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-top: 58px; /* keep clear of the language/theme/fullscreen buttons */
+    border-radius: 0 0 8px 0;
+  }
+}
+
+/* =====================================================================
+   Language button = globe icon ONLY, at every screen size (no label, no
+   chevron). Clicking it opens the centered "Choose your language" dialog
+   (see js/langModal.js) — the old inline dropdown (#langs) is never shown.
+   ===================================================================== */
+#langb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--button-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+#langb .lbl,
+#langb .dd-arrow { display: none !important; }
+#langb .icon-img,
+#langb .globe-icon { width: 24px; height: 24px; color: #fff; }
+@media (max-width: 768px), (pointer: coarse) {
+  #langb { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
+}
+#langs { display: none !important; }
+
+/* =====================================================================
+   "Choose your language" dialog — centered on every screen, dim + blurred
+   backdrop, dark and light theme, mobile / tablet / desktop.
+   ===================================================================== */
+.lm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  background: rgba(3, 6, 42, .62);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  animation: lm-fade .18s ease-out;
+}
+.lm-card {
+  position: relative;
+  margin: auto;                 /* stays centered, scrolls safely on tiny heights */
+  width: min(100%, 420px);
+  padding: 18px 22px 22px;
+  background: #172a63;
+  color: #fff;
+  border: 3px solid #29a3dc;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .5);
+  text-align: center;
+  outline: none;
+  animation: lm-pop .2s ease-out;
+}
+.lm-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 36px;
+}
+.lm-title { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.3; color: inherit; }
+.lm-x {
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lm-x svg { width: 26px; height: 26px; display: block; }
+.lm-sub {
+  margin: 10px auto 18px;
+  max-width: 310px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #dbe6ff;
+}
+.lm-select { position: relative; width: min(100%, 290px); margin: 0 auto 22px; }
+.lm-toggle {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: #fff;
+  color: #1a1a2e;
+  border: 2px solid #3b5bdb;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+.lm-ico svg { width: 20px; height: 20px; display: block; color: #3b5bdb; }
+.lm-val { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lm-chev svg { width: 16px; height: 16px; display: block; color: #6b7280; transition: transform .15s; }
+.lm-toggle.open .lm-chev svg { transform: rotate(180deg); }
+.lm-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 2;
+  max-height: min(176px, 32vh);
+  overflow-y: auto;
+  padding: 4px;
+  background: #f1f3f5;
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .4);
+  text-align: left;
+}
+.lm-item {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+.lm-item:hover { background: #e3e6ea; }
+.lm-item.on { background: #d3d6db; color: #111827; }
+.lm-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.lm-btn {
+  min-width: 104px;
+  min-height: 40px;
+  padding: 9px 20px;
+  border-radius: 24px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: opacity .15s, filter .15s;
+}
+.lm-cancel { background: transparent; color: #fff; border: 2px solid #fff; }
+.lm-apply { background: var(--y); color: #222; border: 2px solid var(--y); }
+.lm-apply:disabled { opacity: .45; cursor: not-allowed; filter: saturate(.6); }
+.lm-card.done { padding: 22px 24px; }
+.lm-done-msg { margin-bottom: 0; }
+.lm-hl { color: var(--y); }
+
+/* Light theme */
+:root[data-theme="light"] .lm-overlay { background: rgba(226, 232, 240, .62); }
+:root[data-theme="light"] .lm-card {
+  background: #fff;
+  color: #1a1a1a;
+  border-color: #4a90e2;
+  box-shadow: 0 18px 50px rgba(30, 60, 120, .25);
+}
+:root[data-theme="light"] .lm-sub { color: #4a5568; }
+:root[data-theme="light"] .lm-x { color: #2f54eb; }
+:root[data-theme="light"] .lm-cancel { color: #2f54eb; border-color: #2f54eb; }
+:root[data-theme="light"] .lm-toggle { background: #f8fafc; border-color: #4a90e2; }
+:root[data-theme="light"] .lm-list { background: #fff; border: 1px solid rgba(0, 0, 0, .08); }
+:root[data-theme="light"] .lm-item { color: #4a5568; }
+:root[data-theme="light"] .lm-item:hover { background: #eef2f7; }
+:root[data-theme="light"] .lm-item.on { background: #dbe7fb; color: #1a1a1a; }
+:root[data-theme="light"] .lm-hl { color: #c77700; }
+
+/* Responsive: desktop / tablet / phone / short landscape phones */
+@media (min-width: 1025px) { .lm-card { width: min(100%, 440px); } }
+@media (max-width: 480px) {
+  .lm-overlay { padding: 12px; }
+  .lm-card { padding: 14px 16px 18px; border-width: 2px; }
+  .lm-title { font-size: 19px; }
+  .lm-sub { margin: 8px auto 14px; font-size: 12px; }
+  .lm-select { margin-bottom: 18px; }
+  .lm-btn { min-width: 96px; padding: 8px 16px; }
+}
+@media (max-height: 460px) {
+  .lm-card { padding: 10px 16px 12px; }
+  .lm-title { font-size: 17px; }
+  .lm-sub { margin: 6px auto 10px; font-size: 12px; }
+  .lm-select { margin-bottom: 12px; }
+  .lm-list { max-height: 112px; }
+}
+@keyframes lm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lm-pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .lm-overlay, .lm-card { animation: none; } }
+
+/* =====================================================================
+   Phones (<=600px): Introduction, "Let us discuss" dialog and Practice's
+   explanation card are attached to the TOP of the screen (not a bottom
+   sheet). The 3D scene is re-framed in the free area below them (see
+   updateReserve() in scene.js).
+   ===================================================================== */
+@media (max-width: 600px) {
+  #panel.tp {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 58px 16px 14px;   /* clear of the language/theme/fullscreen buttons */
+    border-radius: 0 0 14px 14px;
+  }
+  #panel.tp.intro {
+    bottom: auto;
+    max-height: 62vh;
+    padding: 58px 16px 14px;
+  }
+  :root[data-theme="light"] #panel.tp,
+  :root[data-theme="light"] #panel.qpanel { box-shadow: 0 4px 18px rgba(0, 0, 0, .12); }
+}
+
+/* Language names are shown in their own script inside the dialog, so use the
+   same script fonts the rest of the app switches to per language. */
+.lm-item[data-l="gu"], .lm-val[data-l="gu"] { font-family: GU, 'Noto Sans Gujarati', 'Nirmala UI', system-ui, sans-serif; }
+.lm-item[data-l="te"], .lm-val[data-l="te"] { font-family: TE, 'Noto Sans Telugu', 'Nirmala UI', system-ui, sans-serif; }
+.lm-item[data-l="hi"], .lm-val[data-l="hi"],
+.lm-item[data-l="mr"], .lm-val[data-l="mr"] { font-family: 'Noto Sans Devanagari', 'Nirmala UI', system-ui, sans-serif; }
+.lm-item[data-l="en"], .lm-val[data-l="en"] { font-family: P, system-ui, sans-serif; }
+/* =====================================================================
+   Top instruction banner must never cover the language / theme /
+   fullscreen buttons (#tl). On screens narrower than ~900px the centered
+   banner reaches the top-right corner, so it is moved BELOW the button
+   row, and the buttons always stay above it and clickable.
+   ===================================================================== */
+#tl { z-index: 11; }
+
+@media (max-width: 900px) {
+  #banner {
+    top: 66px;                          /* 14px offset + 44px buttons + gap */
+    max-width: min(560px, calc(100vw - 24px));
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 12px;                /* floating card, not attached to the top edge */
+  }
+}
+
+@media (max-width: 600px) {
+  #banner {
+    top: 64px;
+    max-width: calc(100vw - 20px);
+    padding: 9px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+/* Theme button: sun / moon SVG (same size + colour as the fullscreen icon) */
+#theme svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  display: block;
+}
+
+/* ---------------------------------------------------------------------
+   Quiz / Activity answer options: the box grows with the text (any number
+   of lines) and the correct / wrong state is drawn in CSS instead of the
+   fixed-height AnswerCorrect / AnswerIncorrect.webp strips, which cut
+   through multi-line text. Works on every screen size, theme, language. */
+#panel .opt {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+#panel .opt.ok,
+#panel .opt.no {
+  position: relative;
+  background-image: none;
+  padding: 12px 52px 12px 16px; /* right space for the badge */
+  border: 2px solid;
+  text-decoration: none;
+}
+
+/* correct */
+#panel .opt.ok {
+  border-color: #20c05c;
+  background-color: rgba(32, 192, 92, .14);
+}
+/* wrong */
+#panel .opt.no {
+  border-color: #e53b3b;
+  background-color: rgba(229, 59, 59, .14);
+}
+
+/* round badge, always vertically centred whatever the text height */
+#panel .opt.ok::after,
+#panel .opt.no::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+}
+#panel .opt.ok::after {
+  background-color: #20c05c;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E");
+}
+#panel .opt.no::after {
+  background-color: #e53b3b;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E");
+}
+
+/* light theme (same specificity as the old webp rules, placed later so it wins) */
+:root[data-theme="light"] #panel .opt.ok {
+  background-image: none;
+  background-color: rgba(32, 192, 92, .14);
+  border-color: #20c05c;
+  color: #14532d;
+}
+:root[data-theme="light"] #panel .opt.no {
+  background-image: none;
+  background-color: rgba(229, 59, 59, .12);
+  border-color: #e53b3b;
+  color: #7f1d1d;
+}
+/* ---------------------------------------------------------------------
+   Answer explanation (shown after Submit): whole text takes the result
+   colour - green when correct, red when incorrect. Needs the higher
+   specificity because "#panel p" forces white / dark text with !important.
+   Dark theme = light tints (readable on the dark card); light theme =
+   deeper tones (readable on the white card). All screens + languages. */
+#panel p.fb.ok {
+  color: #7dffa8 !important;
+}
+#panel p.fb.no {
+  color: #ff8a80 !important;
+}
+:root[data-theme="light"] #panel p.fb.ok {
+  color: #15803d !important;
+}
+:root[data-theme="light"] #panel p.fb.no {
+  color: #b91c1c !important;
+}
+
+/* the ✓ / ✗ in front of the text follows the same colour */
+#panel p.fb.ok::before,
+#panel p.fb.no::before {
+  color: inherit;
+}
+/* ---------------------------------------------------------------------
+   Activity mixture dropdown: fixed size, independent of the text.
+   - toggle + every list item share one width (--dd-w) and one min height
+   - long text wraps INSIDE the box (also single long words such as
+     "Naphthalene(mothballs)" and Gujarati / Telugu / Marathi / Hindi names)
+   Width is set per screen size so it fits mobile, tablet and desktop. */
+#dd {
+  --dd-w: 184px;              /* desktop */
+}
+@media (max-width: 1024px) {
+  #dd { --dd-w: 164px; }      /* tablet */
+}
+@media (max-width: 600px) {
+  #dd { --dd-w: 154px; }      /* mobile */
+}
+
+/* collapsed toggle */
+#dd .dd-toggle {
+  box-sizing: border-box;
+  width: var(--dd-w);
+  max-width: var(--dd-w);
+  min-height: 56px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+#dd .dd-toggle .lbl {
+  flex: 1;
+  min-width: 0;               /* lets the label shrink and wrap next to the arrow */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+/* opened list: same width as the toggle, every item the same size */
+#dd .dd-list {
+  box-sizing: border-box;
+  width: var(--dd-w);
+  max-width: var(--dd-w);
+}
+#dd .dd-list .pill {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 56px;
+  margin: 0;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+/* ---------------------------------------------------------------------
+   Control buttons scale with the screen: top-right (language, theme,
+   fullscreen, tour) and bottom-left (menu). One variable drives
+   the button, its icon and the gaps, so all five always match. */
+:root { --btn: 40px; }                                   /* desktop */
+@media (max-width: 1024px) { :root { --btn: 36px; } }    /* tablet  */
+@media (max-width: 600px)  { :root { --btn: 32px; } }    /* mobile  */
+@media (max-width: 380px)  { :root { --btn: 28px; } }    /* small mobile */
+
+#langb, #theme, #fs, #tour, #menub {
+  width: var(--btn);
+  height: var(--btn);
+  min-width: var(--btn);
+  min-height: var(--btn);
+}
+
+/* icons inside */
+#langb .icon-img,
+#langb .globe-icon { width: calc(var(--btn) * .45); height: calc(var(--btn) * .45); }
+#theme svg,
+#fs svg            { width: calc(var(--btn) * .55); height: calc(var(--btn) * .55); }
+#tour              { font-size: calc(var(--btn) * .42); }
+#menub .icon-img   { width: 100%; height: 100%; }
+
+/* spacing between buttons + menu popup follows the button size */
+@media (max-width: 1024px) {
+  #tl { top: 8px; right: 8px; gap: 6px; }
+  #bl { left: 10px; bottom: 10px; gap: 6px; }
+  #menu { bottom: calc(var(--btn) + 6px); }
+}
+@media (max-width: 600px) {
+  #tl { gap: 5px; }
+  #bl { gap: 5px; }
+}
+
+/* top instruction banner sits just below the (now smaller) button row */
+@media (max-width: 900px) {
+  #banner { top: calc(8px + var(--btn) + 10px); }
+}
+/* Practice mode, phones + tablets only: no top instruction while the
+   Observation card is showing. Desktop keeps the banner. */
+@media (max-width: 1024px) {
+  body.practice-explain #banner {
+    display: none !important;
+  }
+}
+
+/* Submit / Continue / Next (and the tour's Next / Finish) buttons: semi-bold in
+   every language. The old `.btn { font: 600 13px/1.2 inherit }` shorthand was
+   invalid (`inherit` is not a font-family inside the shorthand), so the browser
+   dropped the whole rule and the weight never applied. Buttons also don't
+   inherit the page font by default, so set font-family explicitly - that keeps
+   Poppins (en/hi/mr) and the Gujarati / Telugu fonts on the button text. */
+.btn,
+#panel .btn,
+.tour-nav-btn,
+#tourNextBtn {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+
+/* Guided tour: the menu button is greyed out (disabled, 40% opacity) before
+   the welcome dialog is passed. During the tour it must look exactly like
+   the other highlighted buttons, so undo the dimming while the tour is
+   running (!important beats the inline opacity set from main.js). It stays
+   unclickable. */
+body.tour-active #menub,
+body.tour-active #menub[disabled] {
+  opacity: 1 !important;
+}
+
+
+/* Top-right buttons (language, theme, fullscreen / normal screen, tour "i"):
+   NO hover colour. After a CLICK the button turns gold-yellow for ~1.5s and
+   then fades back to its normal colour (class added/removed by main.js).
+   Works in dark + light theme, every language, every screen size. The globe
+   and the "i" keep a white icon; theme + fullscreen icons go dark on the gold.
+   !important is needed because these buttons set their background with ID
+   selectors and per-theme rules. */
+#tl #langb, #tl #theme, #tl #fs, #tl #replay, :is(#tl, #bl) #tour {
+  transition: background-color .35s ease, color .35s ease;
+}
+#tl #langb.flash-gold,
+#tl #theme.flash-gold,
+#tl #fs.flash-gold,
+#tl #replay.flash-gold,
+:is(#tl, #bl) #tour.flash-gold,
+:root[data-theme="light"] #tl #langb.flash-gold,
+:root[data-theme="light"] #tl #theme.flash-gold,
+:root[data-theme="light"] #tl #fs.flash-gold,
+:root[data-theme="light"] #tl #replay.flash-gold,
+:root[data-theme="light"] :is(#tl, #bl) #tour.flash-gold {
+  background: var(--y, #ffb81c) !important;
+  opacity: 1;
+}
+#tl #theme.flash-gold, #tl #fs.flash-gold, #tl #replay.flash-gold,
+:root[data-theme="light"] #tl #theme.flash-gold,
+:root[data-theme="light"] #tl #fs.flash-gold,
+:root[data-theme="light"] #tl #replay.flash-gold {
+  color: #1a1a1a !important;
+}
+#tl #langb.flash-gold, #tl #langb.flash-gold .globe-icon,
+:is(#tl, #bl) #tour.flash-gold,
+#tl #replay.flash-gold,
+:root[data-theme="light"] #tl #langb.flash-gold,
+:root[data-theme="light"] #tl #langb.flash-gold .globe-icon,
+:root[data-theme="light"] :is(#tl, #bl) #tour.flash-gold,
+:root[data-theme="light"] #tl #replay.flash-gold {
+  color: #fff !important;
+}
+
+
+/* Top-right buttons (language, theme, fullscreen, replay, tour "i"): no filled
+   background - the page shows through - with a thin ring and matching icon
+   colour, same look in BOTH themes (dark ring/icon on light mode, light
+   ring/icon on dark mode). box-sizing keeps the buttons at the same size
+   as before. */
+#tl #langb, #tl #theme, #tl #fs, #tl #replay, :is(#tl, #bl) #tour {
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease;
+}
+:root:not([data-theme="light"]) #tl #langb,
+:root:not([data-theme="light"]) #tl #theme,
+:root:not([data-theme="light"]) #tl #fs,
+:root:not([data-theme="light"]) #tl #replay,
+:root:not([data-theme="light"]) :is(#tl, #bl) #tour {
+  border: 1.5px solid rgba(230, 233, 245, .92);
+  color: #fff;
+}
+:root:not([data-theme="light"]) #tl #langb .globe-icon,
+:root:not([data-theme="light"]) #tl #theme svg,
+:root:not([data-theme="light"]) #tl #fs svg,
+:root:not([data-theme="light"]) #tl #replay svg {
+  color: #fff;
+}
+:root[data-theme="light"] #tl #langb,
+:root[data-theme="light"] #tl #theme,
+:root[data-theme="light"] #tl #fs,
+:root[data-theme="light"] #tl #replay,
+:root[data-theme="light"] :is(#tl, #bl) #tour {
+  border: 1.5px solid rgba(30, 30, 30, .78);
+  color: #1a1a1a;
+}
+:root[data-theme="light"] #tl #langb .globe-icon,
+:root[data-theme="light"] #tl #theme svg,
+:root[data-theme="light"] #tl #fs svg,
+:root[data-theme="light"] #tl #replay svg {
+  color: #1a1a1a;
+}
+/* Click flash, both themes: gold fill + gold ring, then back to the outline look */
+#tl #langb.flash-gold, #tl #theme.flash-gold,
+#tl #fs.flash-gold, #tl #replay.flash-gold, :is(#tl, #bl) #tour.flash-gold {
+  border-color: var(--y, #ffb81c);
+}
+
+/* =====================================================================
+   Menu button = same look as language / fullscreen / theme / tour buttons
+   (round, thin ring, transparent fill, SVG icon in the ring colour), and
+   ALL five buttons turn light blue on hover. Dark + light theme, every
+   language, mobile / tablet / desktop. !important beats the per-theme
+   ID rules above.
+   ===================================================================== */
+#bl #menub {
+  background: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: none;
+  opacity: 1;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
+}
+:root:not([data-theme="light"]) #bl #menub { border: 1.5px solid rgba(230, 233, 245, .92); color: #fff; }
+:root[data-theme="light"] #bl #menub       { border: 1.5px solid rgba(30, 30, 30, .78);   color: #1a1a1a; }
+#menub svg {
+  display: block;
+  width: calc(var(--btn) * .55);
+  height: calc(var(--btn) * .55);
+  pointer-events: none;
+}
+#bl #menub[disabled] { opacity: .4; }
+body.tour-active #bl #menub, body.tour-active #bl #menub[disabled] { opacity: 1; }
+#bl #menub.flash-gold { background: var(--y, #ffb81c) !important; border-color: var(--y, #ffb81c) !important; color: #1a1a1a !important; }
+
+/* Consistent blue hover for all themes */
+#tl #langb:hover, #tl #theme:hover, #tl #fs:hover, #tl #replay:hover, :is(#tl, #bl) #tour:hover,
+:root #bl #menub:not([disabled]):hover {
+  background: rgba(79, 168, 255, 0.3) !important;
+  border-color: #4fa8ff !important;
+  color: #fff !important;
+  opacity: 1;
+  transform: scale(1.1);
+}
+#tl #langb:hover .globe-icon,
+:root[data-theme="light"] #tl #langb:hover .globe-icon,
+:root:not([data-theme="light"]) #tl #langb:hover .globe-icon,
+#tl #theme:hover svg, #tl #fs:hover svg, #tl #replay:hover svg,
+:root[data-theme="light"] #tl #theme:hover svg, :root[data-theme="light"] #tl #fs:hover svg, :root[data-theme="light"] #tl #replay:hover svg,
+:root:not([data-theme="light"]) #tl #theme:hover svg, :root:not([data-theme="light"]) #tl #fs:hover svg, :root:not([data-theme="light"]) #tl #replay:hover svg {
+  color: #fff !important;
+}
+/* keep the click flash (gold) on top of the hover colour */
+#tl #langb.flash-gold:hover, #tl #theme.flash-gold:hover, #tl #fs.flash-gold:hover, #tl #replay.flash-gold:hover, :is(#tl, #bl) #tour.flash-gold:hover,
+:root #bl #menub.flash-gold:hover {
+  background: var(--y, #ffb81c) !important;
+  border-color: var(--y, #ffb81c) !important;
+}
+
+/* Light mode: consistent blue hover */
+:root[data-theme="light"] #tl #langb:hover,
+:root[data-theme="light"] #tl #theme:hover,
+:root[data-theme="light"] #tl #fs:hover,
+:root[data-theme="light"] #tl #replay:hover,
+:root[data-theme="light"] :is(#tl, #bl) #tour:hover,
+:root[data-theme="light"] #bl #menub:not([disabled]):hover {
+  background: rgba(79, 168, 255, 0.25) !important;
+  border-color: #4fa8ff !important;
+  color: #1a1a1a !important;
+  transform: scale(1.1);
+}
+:root[data-theme="light"] #tl #langb:hover .globe-icon,
+:root[data-theme="light"] #tl #theme:hover svg,
+:root[data-theme="light"] #tl #fs:hover svg,
+:root[data-theme="light"] #tl #replay:hover svg {
+  color: #1a1a1a !important;
+}
+:root[data-theme="light"] #tl #langb.flash-gold:hover,
+:root[data-theme="light"] #tl #theme.flash-gold:hover,
+:root[data-theme="light"] #tl #fs.flash-gold:hover,
+:root[data-theme="light"] #tl #replay.flash-gold:hover,
+:root[data-theme="light"] :is(#tl, #bl) #tour.flash-gold:hover,
+:root[data-theme="light"] #bl #menub.flash-gold:hover {
+  background: var(--y, #ffb81c) !important;
+  border-color: var(--y, #ffb81c) !important;
+}
+
+
+/* Tour "i" button now sits in the bottom-left row right after the menu button (was top-right). Same ring look; the icon is an SVG
+   that follows the ring colour (currentColor), so hover / flash colours apply to it too. */
+#tour svg {
+  display: block;
+  width: calc(var(--btn) * .55);
+  height: calc(var(--btn) * .55);
+  pointer-events: none;
+}
+#bl #tour { flex: 0 0 auto; }
+body.tour-active #bl #tour { opacity: 1; }
+/* ===== Menu + tour "i" buttons removed. New bottom-left EXIT button (SVG) + replay button same size as fullscreen ===== */
+/* Replay: same size as the fullscreen button on mobile / tablet / desktop (was a fixed 40px, so it looked bigger on mob + tab) */
+#tl #replay {
+  width: var(--btn);
+  height: var(--btn);
+  min-width: var(--btn);
+  min-height: var(--btn);
+}
+#tl #replay svg {
+  width: calc(var(--btn) * .55);
+  height: calc(var(--btn) * .55);
+}
+/* Section navigation: replaces the old circular SVG Exit control.
+   Labels + Activity: Previous and Next. Quiz: Previous only. Introduction: neither.
+   The same component works on desktop, tablet and mobile in both themes. */
+#bl .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(230,233,245,.78);
+  background: rgba(20,24,34,.72);
+  color: #fff;
+  box-sizing: border-box;
+  font: 600 13px/1.15 inherit;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
+}
+#bl .nav-btn[hidden] { display: none !important; }
+#bl .nav-btn:hover {
+  background: rgba(79,168,255,.2);
+  border-color: #4fa8ff;
+  color: #fff;
+}
+#bl .nav-btn.flash-gold,
+#bl .nav-btn.flash-gold:hover {
+  background: var(--y, #ffb81c) !important;
+  border-color: var(--y, #ffb81c) !important;
+  color: #1a1a1a !important;
+}
+:root[data-theme="light"] #bl .nav-btn {
+  background: rgba(255,255,255,.86);
+  border-color: rgba(30,30,30,.48);
+  color: #1a1a1a;
+}
+:root[data-theme="light"] #bl .nav-btn:hover {
+  background: rgba(79,168,255,.12);
+  border-color: #4fa8ff;
+  color: #1a1a1a;
+}
+#bl .nav-btn:focus-visible {
+  outline: 2px solid #4fa8ff;
+  outline-offset: 2px;
+}
+@media (max-width: 768px) {
+  #bl { left: 10px; bottom: 10px; gap: 7px; }
+  #bl .nav-btn {
+    min-width: 84px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 420px) {
+  #bl { left: 8px; bottom: 8px; gap: 6px; }
+  #bl .nav-btn { min-width: 78px; padding-inline: 10px; }
+}
+
+
+/* =====================================================================
+   Phone / tablet hardening (notch safe-area, browser-bar height, fingers)
+   ===================================================================== */
+html, body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+button, .pill, .nav-btn, .opt, .lab { touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+#tl    { margin-top: env(safe-area-inset-top, 0px);    margin-right: env(safe-area-inset-right, 0px); }
+#bl    { margin-bottom: env(safe-area-inset-bottom, 0px); margin-left: env(safe-area-inset-left, 0px); }
+#logo  { margin-bottom: env(safe-area-inset-bottom, 0px); margin-right: env(safe-area-inset-right, 0px); }
+#banner { margin-top: env(safe-area-inset-top, 0px); }
+#panel  { margin-bottom: env(safe-area-inset-bottom, 0px); }
+@media (pointer: coarse) { :root { --btn: 40px; } }          /* finger-sized buttons on phone + tablet (all five stay equal) */
+@supports (height: 100dvh) {                                   /* the real visible height, mobile browser bars included */
+  .tour-tooltip { max-height: calc(100dvh - 24px); }
+  .qs-card { max-height: calc(100dvh - 32px); }
+}
+
+#banner, #labels, #bl, #tl { -webkit-user-select: none; user-select: none; }   /* no grey text-selection box on the instruction banner */
